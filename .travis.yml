@@ -1,6 +1,16 @@
 language: java
 sudo: false
 install: true
-
+addons:
+   sonarcloud:
+      organization: "nickpapadakis-github"
+      token:
+         secure: "35a635c7302a49c59219f90cc6c5a87f007c90ff"
 jdk:
-  - oraclejdk8
+   - oraclejdk8
+script:
+   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+   directories:
+   - '$HOME/.m2/repository'
+   - '$HOME/.sonar/cache'
